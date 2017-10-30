@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>FaceDoorApp</h2>
+<img src="FaceDoorApp-model.png"></br>
+<p>
+<b>Q1: Which elements are used by the application (native*)?</b></br>
+<ul>
+<li>fromcamera*
+<li>facerecogn*
+<li>facedoorbegin
+<li>doorlockread*
+<li>facedoorcheck
+<li>doorlockunlock*
+<li>cloudcall*
+<li>facedoorend
+</ul>
+<p>
+<b>Q2: What types of data are generated within the application?</b></br>
+<ul>
+<li>f(frame) [by facedoorbegin]
+<li>doorstat [by facedoorcheck]
+<li>frame [by fromcamera]
+<li>f(frame) [by facerecogn]
+<li>doorstat [by doorlockread]
+</ul>
+<p>
+<b>Q3: Which of these data items are considered to be sensitive?</b></br>
+<ul>
+<li>frame
+</ul>
+<p>
+<b>Q4: Which elements can cause data leakage?</b></br>
+<ul>
+<li>cloudcall
+</ul>
+<p>
+<b>Q5: Is there the danger of information leakage?</b></br>
+<ul>
+</ul>
+<p>
+</body>
+</html>

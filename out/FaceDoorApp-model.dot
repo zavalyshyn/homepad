@@ -1,0 +1,30 @@
+/*
+ * Homepad application graph: FaceDoorApp
+ */
+
+digraph {
+
+	graph [fontname = "helvetica"];
+	node [fontname = "helvetica" fontsize=11 shape = box];
+	edge [fontname = "helvetica" fontsize=9];
+
+	1 [label="FromCamera"];
+	2 [label="FaceRecogn"];
+	3 [label="FaceDoorBegin" style=filled];
+	4 [label="DoorLockRead"];
+	5 [label="FaceDoorCheck" style=filled];
+	6 [label="DoorLockUnlock"];
+	7 [label="CloudCall" color=red];
+	8 [label="FaceDoorEnd" style=filled];
+
+	1 -> 2[label = " frame" fontcolor=red];
+	2 -> 3[label = " f(frame)"];
+	3 -> 4[label = " f(frame)"];
+	3 -> 7[label = " f(frame)"];
+	4 -> 5[label = " doorstat"];
+	5 -> 6[label = " doorstat"];
+	5 -> 7[label = " doorstat"];
+	6 -> 7[label = ""];
+	7 -> 8[label = ""];
+
+}

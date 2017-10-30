@@ -1,0 +1,135 @@
+% ----------------------------------------------------------------
+% HomePad App Model
+% 
+% Name: FaceDoorApp
+% ----------------------------------------------------------------
+
+% 
+% Declare which elements exist in the application
+% 
+
+el(fromcamera).
+
+el(facerecogn).
+
+el(facedoorbegin).
+
+el(doorlockread).
+
+el(facedoorcheck).
+
+el(doorlockunlock).
+
+el(cloudcall).
+
+el(facedoorend).
+
+% 
+% Declare the element interconnections of the application
+% 
+
+arrow(el(fromcamera),el(facerecogn)).
+
+arrow(el(facerecogn),el(facedoorbegin)).
+
+arrow(el(facedoorbegin),el(doorlockread)).
+
+arrow(el(facedoorbegin),el(cloudcall)).
+
+arrow(el(doorlockread),el(facedoorcheck)).
+
+arrow(el(facedoorcheck),el(doorlockunlock)).
+
+arrow(el(facedoorcheck),el(cloudcall)).
+
+arrow(el(doorlockunlock),el(cloudcall)).
+
+arrow(el(cloudcall),el(facedoorend)).
+
+% 
+% Declare application elements as untrusted
+% 
+
+untrusted(el(facedoorbegin)).
+
+untrusted(el(facedoorcheck)).
+
+untrusted(el(facedoorend)).
+
+% 
+% Declare which elements are data sinks
+% 
+
+sink(el(cloudcall)).
+
+% 
+% Rule that returns the input data of a given element. The data is
+% provided as a list of data(_) atoms.
+% 
+
+input(el(X), Y) :-
+	arrow(el(Z), el(X)),		% there is an element Z connected to X...
+	output(el(Z), Y).			% whose output is data Y.
+
+% 
+% Facts and rules that tell how to determine the output of an element.
+% The first rule applies to untrusted elements and expresses the idea that the
+% element will try to pass forward all the input it can to the output in order
+% to direct the maximum data it can towards a data sink. The following rules
+% apply to all native elements and specify what data is ouput by each element.
+% 
+
+output(el(X), Y) :- 
+	untrusted(el(X)), 			% if element not trusted, assume worst case:
+	input(el(X), Y).			% output everything received from the input
+
+
+output(el(fromcamera), [ data(frame) ]).
+
+output(el(facerecogn), [ data(X) ]) :- input(el(facerecogn), Y), member(data(Z), Y), X = f(Z).
+
+output(el(doorlockread), [ data(doorstat) ]).
+
+output(el(doorlockunlock), []).
+
+output(el(cloudcall), []).
+
+% 
+% Rules to determine which data is output by each element.
+% 
+
+dataout(X) :- output(el(_), Y), member(data(X), Y).
+dataout(X, Z) :- output(el(Z), Y), member(data(X), Y).
+
+% 
+% Declare user-defined sensitive data items.
+% 
+
+sensitive(data(frame)).
+
+% 
+% Rules to determine if data is being leaked. Data is leaked if it appears
+% as the input to an element that is marked as sink.
+% 
+
+leakall(X) :- 
+	input(el(Y), X),	 		% there is leak if data arrives the input gate
+	sink(el(Y)).				% of a sink element
+leak(data(X)) :- 
+	input(el(Y), Z),	 		% there is leak if data arrives the input gate
+	sink(el(Y)),				% of a sink element
+	member(data(X), Z).			% check if specific piece of data in the list
+leak(data(X), el(Y)) :- 
+	input(el(Y), Z),	 		% there is leak if data arrives the input gate
+	sink(el(Y)),				% of a sink element
+	member(data(X), Z).			% check if specific piece of data in the list
+
+% 
+% Rules to determine if if there's leakage of sensitive data.
+% 
+
+danger(data(X)) :- leak(data(X)), sensitive(data(X)).
+
+% ----------------------------------------------------------------
+% Model END
+% ----------------------------------------------------------------

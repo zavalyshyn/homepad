@@ -1,0 +1,31 @@
+
+Version 08 (05-09-2016, nsantos)
+---------------------------------------------------------
+
+CHANGES:
+- generation of prolog model of hub applications
+- generation of privacy report based on the generated prolog model
+- generation of vizgraphs based on the application layout for visualization of the data flow
+
+TODO:
+- html privacy report with extended png graphs
+- support for modules, which should enclosed both the code and model of each component
+- original application graph defined by the programmer must indicate parameters to elements
+- model also events and allow for queries about the time
+- implement sandboxing for the application code & third party elements
+
+
+Version 07 (04-09-2016, nsantos)
+---------------------------------------------------------
+
+CHANGES:
+- implementation of all elements and components of the basic use case
+- separation between frontend (application runtime) and backend components
+- implementation of a logger to help debug future applications / components
+
+TODO:
+- support for modules, which should enclosed both the code and model of each component
+- generation of vizgraphs based on the application layout for vizualization of the data flow
+- generation of prolog model of the application for model checking
+- implement sandboxing for the application code
+- implement sandboxing for third-party components
