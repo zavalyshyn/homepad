@@ -28,6 +28,7 @@ public class Layout {
 		}
 		if (!toList.contains(to)) {
 			toList.add(to);
+			// shouldn't we update _edges now?
 		}
 	}
 	
