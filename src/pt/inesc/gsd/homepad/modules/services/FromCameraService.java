@@ -1,11 +1,7 @@
 package pt.inesc.gsd.homepad.modules.services;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URL;
 import java.net.URLConnection;
@@ -78,8 +74,6 @@ public class FromCameraService extends Component {
 						}
 						
 						
-//						System.out.println(header);
-						
 						// 255 indicates the start of the jpeg image
 						while((urlStream.read()) != 255)
 						{
@@ -102,14 +96,15 @@ public class FromCameraService extends Component {
 						stringWriter = new StringWriter(128);
 
 			        	
+		        	 sendOutgoingEvent(new FromCameraGlobalEvent(imageBytes));
 		        	 Thread.sleep(1000);
-		        	 sendOutgoingEvent(new FromCameraGlobalEvent(imageBytes));	
 			        	
 			        } catch(InterruptedException v) {
 			        	return;
 			        } catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						return;
 					}
 	        	}
 		    }
@@ -118,7 +113,6 @@ public class FromCameraService extends Component {
 	}
 
 	
-	// dirty but it works content-length parsing
 	private static int contentLength(String header)
 	{
 		int indexOfContentLength = header.indexOf(CONTENT_LENGTH);
