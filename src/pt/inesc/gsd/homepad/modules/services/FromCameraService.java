@@ -36,8 +36,6 @@ public class FromCameraService extends Component {
 		    public void run() {
 	        	while(_cameraPoolerRunning) {
 			        try {
-
-			        	
 			        	// Open the stream
 						URL url = new URL(STREAM_URL);
 						URLConnection urlConn = url.openConnection();
@@ -100,11 +98,13 @@ public class FromCameraService extends Component {
 		        	 Thread.sleep(1000);
 			        	
 			        } catch(InterruptedException v) {
-			        	return;
+			        	System.out.println("FromCamera service was interrupted");
+			        	// return;
 			        } catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						return;
+						System.out.println("Error processing a camera stream");
+						// return;
 					}
 	        	}
 		    }
