@@ -12,16 +12,13 @@ public class HelloWorldAppManifest extends AppManifest {
 
 	@Override
 	public String getAppElementClassName() {
-		return "pt.inesc.gsd.homepad.apps.HelloWorld";
+		return "pt.inesc.gsd.homepad.apps.HelloWorldApp";
 	}
 
 	@Override
 	public String[] getRequiredElements() {
 		return new String[] {
 			"FromCamera",
-//			"FaceRecogn",
-//			"DoorLockRead",
-//			"DoorLockUnlock",
 			"CloudCall"
 		};
 	}
@@ -30,7 +27,6 @@ public class HelloWorldAppManifest extends AppManifest {
 	public String[] getDeclaredElements() {
 		return new String[] {
 			"HelloWorldBegin",
-			"HelloWorldCheck",
 			"HelloWorldEnd"
 		};
 	}
@@ -38,12 +34,11 @@ public class HelloWorldAppManifest extends AppManifest {
 	@Override
 	public Layout getLayout() {
 		Layout layout = new Layout();
-		
+
 		// specify the nodes
 		String[] n = {
 			"FromCamera",		// 1
 			"HelloWorldBegin",	// 2
-			"HelloWorldCheck",  // ...
 			"CloudCall",
 			"HelloWorldEnd"
 		};
@@ -53,7 +48,6 @@ public class HelloWorldAppManifest extends AppManifest {
 		layout.addEdge(1, 2);
 		layout.addEdge(2, 3);
 		layout.addEdge(3, 4); // port: 0
-		layout.addEdge(4, 5); // port: 1
 		return layout;
 	}
 }
