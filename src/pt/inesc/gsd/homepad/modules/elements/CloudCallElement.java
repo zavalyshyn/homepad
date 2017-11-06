@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pt.inesc.gsd.homepad.Logger;
 import pt.inesc.gsd.homepad.modules.messages.CloudCallRequestGlobalEvent;
 import pt.inesc.gsd.homepad.modules.messages.CloudCallResponseGlobalEvent;
+import pt.inesc.gsd.homepad.modules.ports.CloudResponsePortType;
 import pt.inesc.gsd.homepad.modules.ports.NullPortType;
 import pt.inesc.gsd.homepad.modules.ports.UrlParamPortType;
 import pt.inesc.gsd.homepad.server.GlobalEvent;
@@ -50,7 +51,9 @@ public class CloudCallElement extends NativeLayoutElement {
 	public void handleGlobalEvent(GlobalEventGenerator source, GlobalEvent event) {
 		LOGGER.log(Logger.GE, "Received: " + event.getName());			
 		if (event instanceof CloudCallResponseGlobalEvent) {
-			sendEventToPort(new NullPortType(), 0);
+			CloudCallResponseGlobalEvent e = (CloudCallResponseGlobalEvent) event;
+			//sendEventToPort(new NullPortType(), 0);
+			sendEventToPort(new CloudResponsePortType(e.getResponse()), 0);
 		}
 	}
 
