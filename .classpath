@@ -3,5 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="lib/org.cs3.prolog.connector_3.1.2.201504300958.jar"/>
+	<classpathentry kind="lib" path="/home/holod/inesc-exp/homepad/homepad-local/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/holod/inesc-exp/homepad/homepad-local/lib/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="/home/holod/inesc-exp/homepad/homepad-local/lib/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="/home/holod/inesc-exp/homepad/homepad-local/lib/httpmime-4.5.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
