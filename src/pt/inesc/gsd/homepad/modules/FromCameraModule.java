@@ -2,6 +2,7 @@ package pt.inesc.gsd.homepad.modules;
 
 import pt.inesc.gsd.homepad.Module;
 import pt.inesc.gsd.homepad.modules.elements.FaceRecognElement;
+import pt.inesc.gsd.homepad.modules.elements.FromCameraElement;
 import pt.inesc.gsd.homepad.modules.services.FromCameraService;
 import pt.inesc.gsd.homepad.server.Component;
 import pt.inesc.gsd.homepad.server.runtime.NativeLayoutElement;
@@ -9,7 +10,7 @@ import pt.inesc.gsd.homepad.server.runtime.NativeLayoutElement;
 public class FromCameraModule extends Module {
 	
 	public FromCameraModule() {
-		NativeLayoutElement el = new FaceRecognElement();
+		NativeLayoutElement el = new FromCameraElement();
 		_elements.put(el.getName(), el);
 	}
 
