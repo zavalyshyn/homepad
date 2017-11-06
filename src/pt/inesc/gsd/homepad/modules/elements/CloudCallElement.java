@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pt.inesc.gsd.homepad.Logger;
 import pt.inesc.gsd.homepad.modules.messages.CloudCallRequestGlobalEvent;
 import pt.inesc.gsd.homepad.modules.messages.CloudCallResponseGlobalEvent;
+import pt.inesc.gsd.homepad.modules.ports.CloudRequestMultipartPortType;
 import pt.inesc.gsd.homepad.modules.ports.CloudResponsePortType;
 import pt.inesc.gsd.homepad.modules.ports.NullPortType;
 import pt.inesc.gsd.homepad.modules.ports.UrlParamPortType;
@@ -44,6 +45,9 @@ public class CloudCallElement extends NativeLayoutElement {
 		} else if (event instanceof UrlParamPortType) {
 			UrlParamPortType e = (UrlParamPortType) event;
 			this.sendGlobalEvent(new CloudCallRequestGlobalEvent(getId(), e.getParam()));
+		} else if (event instanceof CloudRequestMultipartPortType) {
+			CloudRequestMultipartPortType e = (CloudRequestMultipartPortType) event;
+			this.sendGlobalEvent(new CloudCallRequestGlobalEvent(getId(), e.getUrl(), e.isMultipart(), e.getPayload()));
 		}
 	}
 
