@@ -82,7 +82,7 @@ public class DemoHelloWorld {
 		Server server = new Server();
 		server.initialize(registry, appManifest);
 		server.enable();
-		server.wait(3000);
+		server.wait(30000);
 		server.disable();
 		System.out.println("Bye.");
 	}
